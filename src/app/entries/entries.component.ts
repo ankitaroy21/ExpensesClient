@@ -20,6 +20,7 @@ export class EntriesComponent implements OnInit {
   pageNo: any;
   pagesize: any;
   sortDir: any;
+  name: any;
   total: any;
   page: any;
   constructor(private service: EntryService, private dialog: MatDialog) { }
@@ -29,7 +30,8 @@ export class EntriesComponent implements OnInit {
    this.pagesize=5;
     this.pageNo = 1;
     this.sortDir = true;
-    this.service.getAll(this.pageNo, this.pagesize, this.sortDir).subscribe((data: any) => {
+    this.name = "";
+    this.service.getAll(this.pageNo, this.pagesize, this.sortDir, this.name).subscribe((data: any) => {
       this.total = data.data.length;
       this.dataSource = new MatTableDataSource<EntryElement>(
         data.data as EntryElement[]
@@ -43,7 +45,7 @@ export class EntriesComponent implements OnInit {
 
   sortFunction(): void {
     this.sortDir = this.sortDir == false ? true : false;
-    this.service.getAll(this.pageNo, this.pagesize, this.sortDir).subscribe((data: any) => {
+    this.service.getAll(this.pageNo, this.pagesize, this.sortDir, this.name).subscribe((data: any) => {
       this.dataSource = new MatTableDataSource<EntryElement>(
         data.data as EntryElement[]
       )
@@ -53,7 +55,7 @@ export class EntriesComponent implements OnInit {
   onPaginate(pageEvent: PageEvent) {
     this.pagesize = +pageEvent.pageSize;
     this.pageNo = +pageEvent.pageIndex + 1;
-    this.service.getAll(this.pageNo, this.pagesize, true).subscribe((data: any) => {
+    this.service.getAll(this.pageNo, this.pagesize, true, this.name).subscribe((data: any) => {
       this.dataSource = new MatTableDataSource<EntryElement>(
         data.data as EntryElement[]
       );
@@ -62,8 +64,12 @@ export class EntriesComponent implements OnInit {
 
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.name = (event.target as HTMLInputElement).value;
+    this.service.getAll(this.pageNo, this.pagesize, true, this.name).subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource<EntryElement>(
+        data.data as EntryElement[]
+      );
+    })
 
   }
   updateEntry(entry: any) {

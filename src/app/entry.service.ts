@@ -13,8 +13,8 @@ export class EntryService {
   getEntry(id: any) {
     return this.http.get(this.baseURL + '/' + id);
   }
-  getAll(pageNo: any, pageSize: any, sortDir:any) {
-    return this.http.get(this.baseURL + "?PageNumber=" + pageNo + "&PageSize=" + pageSize +"&sortDir=" + sortDir);
+  getAll(pageNo: any, pageSize: any, sortDir:any, name:any) {
+    return this.http.get(this.baseURL + "?PageNumber=" + pageNo + "&PageSize=" + pageSize +"&sortDir=" + sortDir+"&name=" + name);
   }
   
   createEntry(entry: any) {
