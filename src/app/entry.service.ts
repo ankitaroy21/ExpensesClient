@@ -26,4 +26,7 @@ export class EntryService {
   deleteEntry(id: any) {
     return this.http.delete(this.baseURL + '/' + id, {responseType: 'text'});
   }
+  getPage() {
+    return this.http.get(this.baseURL + '/page');
+  }
 }

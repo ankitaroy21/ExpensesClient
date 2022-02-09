@@ -1,7 +1,7 @@
-<!-- <mat-form-field appearance="standard">
+<mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
-</mat-form-field> -->
+</mat-form-field>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
   <ng-container matColumnDef="Description">
     <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sortFunction()" >Description</th>
@@ -38,6 +38,6 @@
 <mat-paginator
   [length]="total"
   [pageSize]="pagesize"
-  [pageSizeOptions]="[10, 25, 100]"
+  [pageSizeOptions]="page"
   (page)="onPaginate($event)">
 ></mat-paginator>

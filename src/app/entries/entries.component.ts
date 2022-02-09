@@ -21,11 +21,12 @@ export class EntriesComponent implements OnInit {
   pagesize: any;
   sortDir: any;
   total: any;
+  page: any;
   constructor(private service: EntryService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
-   this.pagesize=10;
+   this.pagesize=5;
     this.pageNo = 1;
     this.sortDir = true;
     this.service.getAll(this.pageNo, this.pagesize, this.sortDir).subscribe((data: any) => {
@@ -33,6 +34,9 @@ export class EntriesComponent implements OnInit {
       this.dataSource = new MatTableDataSource<EntryElement>(
         data.data as EntryElement[]
       );
+    });
+    this.service.getPage().subscribe((data:any) =>{
+      this.page = data;
     });
   }
 
@@ -61,9 +65,6 @@ export class EntriesComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
   updateEntry(entry: any) {
     this.dialog.open(UpdateEntryComponent, {
