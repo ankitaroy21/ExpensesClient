@@ -82,5 +82,15 @@ export class EntriesComponent implements OnInit {
       },
     });
   }
+
+
+  export(){
+    this.service.exportCSV().subscribe(() =>{
+
+      console.log("hi");
+   //   https://localhost:44391/api/entries/csv
+    })
+  }
+
 }
 

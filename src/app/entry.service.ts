@@ -29,4 +29,7 @@ export class EntryService {
   getPage() {
     return this.http.get(this.baseURL + '/page');
   }
+  exportCSV() {
+    return this.http.get(this.baseURL + '/csv', {responseType: 'text'});
+  }
 }
