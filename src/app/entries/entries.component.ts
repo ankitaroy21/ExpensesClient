@@ -5,6 +5,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { EntryService } from '../entry.service';
 import { EntryElement } from '../interfaces/EntryElement';
 import { UpdateEntryComponent } from '../update-entry/update-entry.component';
+//import 'rxjs/Rx';
+
+
  @Component({
   selector: 'app-entries',
   templateUrl: './entries.component.html',
@@ -83,14 +86,12 @@ export class EntriesComponent implements OnInit {
     });
   }
 
-
   export(){
-    this.service.exportCSV().subscribe(() =>{
-
-      console.log("hi");
-   //   https://localhost:44391/api/entries/csv
+      this.service.exportCSV().subscribe((data) =>{
+        console.log("hi");
     })
+    //.catch
+   
   }
-
 }
 

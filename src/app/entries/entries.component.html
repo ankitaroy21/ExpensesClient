@@ -34,5 +34,5 @@
 <mat-paginator [length]="total" [pageSize]="pagesize" [pageSizeOptions]="page" (page)="onPaginate($event)">
   ></mat-paginator>
 
-<button (click)="export()" mat-raised-button color="warn"> <b>Export</b>
-</button>
+<a href ="https://localhost:44391/api/entries/csv" download="employee.csv" > <b>Export</b>
+</a>

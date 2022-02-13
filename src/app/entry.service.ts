@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class EntryService {
   baseURL: string = 'https://localhost:44391/api/entries';
 
-  //headers = new HttpHeaders({'Content-Type' : 'application/json'});
+  headers = new HttpHeaders({'Content-Type' : 'application/json'});
   //{headers : this.headers}
   constructor(private http: HttpClient) {}
 
@@ -29,7 +30,7 @@ export class EntryService {
   getPage() {
     return this.http.get(this.baseURL + '/page');
   }
-  exportCSV() {
-    return this.http.get(this.baseURL + '/csv', {responseType: 'text'});
+  exportCSV() :Observable<ArrayBuffer>{
+    return this.http.get(this.baseURL + '/csv', {responseType: 'arraybuffer'});
   }
 }
